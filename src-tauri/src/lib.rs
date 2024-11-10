@@ -1,7 +1,13 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+use std::fs::File;
+use std::io::Write;
+
 #[tauri::command]
 fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name) 
+    print!("it works {}" , name);
+    let mut file = File::create(name).unwrap();
+    file.write_all(b"Hello, Rust!").unwrap();
+    format!("Hello, {} you have written a file from rust", name) 
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
